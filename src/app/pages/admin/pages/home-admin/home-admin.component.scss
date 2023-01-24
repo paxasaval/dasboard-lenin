@@ -1,0 +1,481 @@
+:root{
+  width: 100%;
+}
+.main-container{
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-1);
+  align-items: center;
+}
+.info{
+  display: flex;
+  height: 10vh;
+  padding: 1em 0;
+  width: 100%;
+}
+.navigation{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 50%;
+  padding-left: 1em;
+}
+.navigation p{
+  margin: 0;
+  padding: 0;
+  padding: 0em 0.5em;
+}
+.userInfo{
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 2.5em;
+}
+.userInfo div,p,button{
+  margin: 0 0.75em;
+}
+.userPhoto{
+  border-radius: 50%;
+  background-color: #fff;
+  height: 3em;
+  width: 3em;
+}
+.userLogOut{
+  border-radius: 5px;
+  min-width: 8em;
+  height: 3em;
+  background-color: var(--accent);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+}
+.userLogOut *{
+  padding: 0 0.5em;
+}
+.br{
+  height: 1px;
+  width: 98%;
+  border-bottom: 1px solid #7c7c7c;
+}
+.summary-cards{
+  width: 95%;
+  display: flex;
+  justify-content: space-around;
+
+}
+.cardSummary{
+  min-width: 16%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1.25em;
+  border-radius: 8px;
+  height: 15vh;
+  margin: 1em;
+  color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.cardInfo{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.bg-1{
+  background: radial-gradient(circle, rgba(60,110,113,1) 0%, rgba(56,102,110,1) 100%);
+
+}
+.bg-2{
+  background: radial-gradient(circle,rgba(56,102,110,1) 0%, rgba(51,94,107,1) 100%);
+
+}
+.bg-3{
+  background: radial-gradient(circle,rgba(51,94,107,1) 0%, rgba(45,84,103,1) 100%);
+}
+.bg-4{
+  background: radial-gradient(circle,rgba(45,84,103,1) 0%, rgba(40,75,99,1) 100%);
+}
+.cardSummary-Date{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.cardSummary-Date p{
+  width: 50%;
+  font-size: 1em;
+  padding: 0.75em;
+}
+.cardSummary span{
+  padding: 0.5em;
+  margin-left: 0.5em;
+  padding: 0.25em;
+  font-size: 2em;
+}
+.cardSummary-desc{
+  padding: 0.25em;
+  font-size: 1.5em;
+}
+.summaryQuiz{
+  width: 96%;
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 8px;
+  padding: 1em;
+  margin-bottom: 1.5em;
+}
+.summaryQuiz h2{
+  padding: 0;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  margin-top: 1.25em;
+  margin-bottom: 0.25em;
+}
+
+.summaryInfo{
+  width: 100%;
+  min-height: 50%;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chartSummary{
+  height: 100%;
+  width: 47%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-1);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+.chartSummary p{
+  width: 10%;
+}
+.chartCard{
+  padding: 1em;
+  width: 49%;
+}
+.chartCard2{
+  width: 60%;
+}
+.summaryCharts{
+  height: 30%;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+.charPieUnity{
+  width: 30%;
+  display: flex;
+  padding: 1em;
+  background-color: var(--bg-1);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.charPieUnity canvas{
+  height: 100%;
+}
+.infoChart{
+  width: 50%;
+  align-self: center;
+}
+.icon{
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5em;
+  color: #fff;
+}
+.charts1{
+  width: 96%;
+  border-radius: 8px;
+  padding: 1em;
+  margin-top: 1em;
+  display: flex;
+  margin-bottom: 1em;
+  justify-content: space-between;
+}
+.chart2Info{
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: var(--bg-1);
+  align-items: center;
+  padding: 1em;
+  margin-right: 1em ;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+
+}
+.chart2charts{
+  width: 80%;
+}
+.chartPie{
+  background-color: var(--bg-1);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+
+}
+.chart1-filter{
+  width: 37%;
+  height: 100%;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--bg-1);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.chart1-filter h2{
+  font-size: 1.5em;
+  padding-left: 0.75em;
+  padding-bottom: 0;
+  margin-bottom: 0;
+
+}
+.chart1-filter p{
+  font-size: 0.75em;
+  padding-left: 1.25em;
+  color: #7c7c7c;
+  margin-bottom: 3em;
+}
+
+.form-chart1{
+  height: 100%;
+}
+
+.filter1{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.filter2{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.selectfilter{
+  width: 80%;
+  align-self: center;
+  justify-self: center;
+}
+.form-chart1 form{
+  display: flex;
+  height: 100%;
+}
+form label{
+  font-size: 1.15em;
+  font-weight: 600;
+  height: 1.5em;
+  color: #7c7c7c;
+
+}
+form input{
+  height: 3em;
+  width: 100%;
+  margin-bottom: 1.5em;
+  border: 2px solid #b6b5b5;
+  border-radius: 8px;
+  padding: 0.5em 1em;
+}
+.chartBtn{
+  height: 3em;
+  width: 60%;
+  border: none;
+  background-color: var(--accent);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1.15em;
+}
+.chart1{
+  width: 57%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  background-color: var(--bg-1);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.cardChart{
+  width: 85%;
+
+}
+.card2{
+  width: 70%;
+}
+.card3{
+  width: 50%;
+}
+.charts2{
+  flex-direction: column;
+}
+.charts{
+  display: flex;
+  width: 100%;
+  height: 30vh;
+  justify-content: space-between;
+}
+.charts .chartPie{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18%;
+}
+.cpie{
+  width: 60%;
+}
+.selectQuiz{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.table{
+  width: 98%;
+  display: flex;
+  margin-top: 2em;
+  justify-content: center;
+  align-items: center;
+}
+.table table{
+  width: 70%;
+}
+.mat-column-header-row-unity1{
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.25em;
+  background-color: var(--chart1);
+
+}
+.mat-column-header-row-unity2{
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.25em;
+  background-color: var(--chart2);
+
+}
+.mat-column-header-row-unity3{
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.25em;
+  background-color: var(--chart3);
+
+}
+.mat-column-P1-1{
+  background-color: var(--chart1);
+  text-align: center;
+  width: 5ch;
+
+}
+.mat-column-P1-2{
+  background-color: var(--chart1);
+  text-align: center;
+  width: 5ch;
+
+}
+.mat-column-P1-3{
+  background-color: var(--chart1);
+  text-align: center;
+  width: 5ch;
+
+}
+.mat-column-P1-4{
+  background-color: var(--chart1);
+  text-align: center;
+  width: 5ch;
+
+}
+.mat-column-P1-5{
+  background-color: var(--chart1);
+  text-align: center;
+  width: 5ch;
+
+}
+//
+.mat-column-P2-1{
+  background-color: var(--chart2);
+  text-align: center;
+  width: 5ch;
+
+}
+.mat-column-P2-2{
+  background-color: var(--chart2);
+  text-align: center;
+  width: 5ch;
+
+}
+.mat-column-P2-3{
+  background-color: var(--chart2);
+  text-align: center;
+  width: 5ch;
+
+}
+.mat-column-P2-4{
+  background-color: var(--chart2);
+  text-align: center;
+  width: 5ch;
+
+}
+.mat-column-P2-5{
+  background-color: var(--chart2);
+  text-align: center;
+  width: 5ch;
+
+}
+//
+.mat-column-P3-1{
+  background-color: var(--chart3);
+  text-align: center;
+  width: 5ch;
+
+}
+.mat-column-P3-2{
+  background-color: var(--chart3);
+  text-align: center;
+  width: 5ch;
+}
+.mat-column-P3-3{
+  background-color: var(--chart3);
+  text-align: center;
+  width: 5ch;
+
+}
+.mat-column-P3-4{
+  background-color: var(--chart3);
+  text-align: center;
+  width: 5ch;
+
+}
+.mat-column-P3-5{
+  background-color: var(--chart3);
+  text-align: center;
+  width: 5ch;
+
+}
+th.mat-header-cell{
+  padding-right: 0;
+}
+
+
+

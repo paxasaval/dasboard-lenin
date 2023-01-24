@@ -1,1 +1,98 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+@include mat.core();
+$color1:  (
+  50 : #e8eeee,
+  100 : #c5d4d4,
+  200 : #9eb7b8,
+  300 : #779a9c,
+  400 : #598486,
+  500 : #3c6e71,
+  600 : #366669,
+  700 : #2e5b5e,
+  800 : #275154,
+  900 : #1a3f42,
+  A100 : #83f5ff,
+  A200 : #50f0ff,
+  A400 : #1decff,
+  A700 : #03eaff,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #ffffff,
+      500 : #ffffff,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);
+
+$accent1:(
+  50 : #e5e9ec,
+  100 : #bfc9d0,
+  200 : #94a5b1,
+  300 : #698192,
+  400 : #48667a,
+  500 : #284b63,
+  600 : #24445b,
+  700 : #1e3b51,
+  800 : #183347,
+  900 : #0f2335,
+  A100 : #72b8ff,
+  A200 : #3f9fff,
+  A400 : #0c85ff,
+  A700 : #0079f1,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #ffffff,
+      400 : #ffffff,
+      500 : #ffffff,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #ffffff,
+      A700 : #ffffff,
+  )
+);
+
+$my-primary: mat.define-palette($color1, 500);
+$my-accent: mat.define-palette($accent1,500);
+
+$my-theme: mat.define-light-theme((
+ color: (
+   primary: $my-primary,
+   accent: $my-accent,
+ )
+));
+
+@include mat.all-component-themes($my-theme);
+:root{
+  --primary:#3C6E71;
+  --accent:#284B63;
+  --bg-1:#fff;
+  --bg-2:#353535;
+  --bg-3:#D9d9d9;
+  --bg-5:#fff;
+  --chart1:#8fbdd3;
+  --chart2:#3C6e71;
+  --chart3:#a2b38b;
+
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
