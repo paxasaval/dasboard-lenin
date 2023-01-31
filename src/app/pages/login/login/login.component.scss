@@ -1,0 +1,35 @@
+.main{
+  height: 100vh;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: 101vh;
+  background-position: right;
+
+}
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  background-color: #fff;
+  height: 500px;
+  width: 300px;
+  border-radius: 15px;
+  position: relative;
+  left: 78%;
+  top: 20%
+}
+.form{
+  display: flex;
+  flex-direction: column;
+}
+.btn{
+  text-align: center;
+}
+/*QUITA EL RESALTADO AL TEXTO DEL CAMPO INPUT*/
+input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
+
+

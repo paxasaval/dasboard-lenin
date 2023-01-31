@@ -1,23 +1,12 @@
 <main class="class-container">
   <section class="info">
     <div class="navigation">
-      <p>Dashboard</p>
+      <img class="logo" src="../../../../../assets/logo.png" alt="" />
     </div>
     <div class="userInfo">
-      <div class="userPhoto">
-        <img
-          src=""
-          alt=""
-          style="
-            width: 50px;
-            height: 50px;
-            background-color: aqua;
-            border-radius: 50%;
-          "
-        />
-      </div>
-      <p class="userName">Usuario Test</p>
-      <button class="userLogOut">Salir</button>
+      <div class="userPhoto"></div>
+      <p class="userName">{{ userName }}</p>
+      <button class="userLogOut" (click)="logOut()">Salir</button>
     </div>
   </section>
   <div class="br"></div>
@@ -25,50 +14,75 @@
     <article class="cardSummary bg-1">
       <div class="cardInfo">
         <p class="cardSummary-desc">Indice Economico</p>
-        <span>#####</span>
+        <span class="avg">~ {{ avgEco | number : "1.2-2" }}</span>
         <div class="cardSummary-Date">
-          <p>Mejor impsum</p>
-          <p>Peor impsum</p>
+          <p class="colorUp">
+            {{ bestEco.municipio }} <span class="up">{{ bestEco.value }}</span>
+          </p>
+          <p class="colorDown">
+            {{ worstEco.municipio }}<span class="up">{{ worstEco.value }}</span>
+          </p>
         </div>
       </div>
     </article>
     <article class="cardSummary bg-2">
       <div class="cardInfo">
         <p class="cardSummary-desc">Indice social</p>
-        <span>#####</span>
+        <span class="avg">~ {{ avgSoc | number : "1.2-2" }}</span>
         <div class="cardSummary-Date">
-          <p>Mejor impsum</p>
-          <p>Peor impsum</p>
+          <p class="colorUp">
+            {{ bestSoc.municipio }} <span class="up">{{ bestSoc.value }}</span>
+          </p>
+          <p class="colorDown">
+            {{ worstSoc.municipio }}<span class="up">{{ worstSoc.value }}</span>
+          </p>
         </div>
       </div>
     </article>
     <article class="cardSummary bg-3">
       <div class="cardInfo">
         <p class="cardSummary-desc">Indice ambiental</p>
-        <span>#####</span>
+        <span class="avg">~ {{ avgAmb | number : "1.2-2" }}</span>
         <div class="cardSummary-Date">
-          <p>Mejor impsum</p>
-          <p>Peor impsum</p>
+          <p class="colorUp">
+            {{ bestAmb.municipio }} <span class="up">{{ bestAmb.value }}</span>
+          </p>
+          <p class="colorDown">
+            {{ worstAmb.municipio }}
+            <span class="up">{{ worstAmb.value }}</span>
+          </p>
         </div>
       </div>
     </article>
     <article class="cardSummary bg-4">
       <div class="cardInfo">
         <p class="cardSummary-desc">Indice Insttucional</p>
-        <span>#####</span>
+        <span class="avg">~ {{ avgInst | number : "1.2-2" }}</span>
         <div class="cardSummary-Date">
-          <p>Mejor impsum</p>
-          <p>Peor impsum</p>
+          <p class="colorUp">
+            {{ bestInst.municipio }}
+            <span class="up">{{ bestInst.value }}</span>
+          </p>
+          <p class="colorDown">
+            {{ worstInst.municipio }}
+            <span class="up">{{ worstInst.value }}</span>
+          </p>
         </div>
       </div>
     </article>
-    <article class="cardSummary bg-4">
+    <article class="cardSummary bg-5">
       <div class="cardInfo">
         <p class="cardSummary-desc">Indice global sustenabilidad</p>
-        <span>#####</span>
+        <span class="avg">~ {{ avgGlob | number : "1.2-2" }}</span>
         <div class="cardSummary-Date">
-          <p>Mejor impsum</p>
-          <p>Peor impsum</p>
+          <p class="colorUp">
+            {{ bestGlobal.municipio }}
+            <span class="up">{{ bestGlobal.value }}</span>
+          </p>
+          <p class="colorDown">
+            {{ worstGlobal.municipio }}
+            <span class="up">{{ worstGlobal.value }}</span>
+          </p>
         </div>
       </div>
     </article>
@@ -76,14 +90,46 @@
   <section class="summaryQuiz">
     <h2>Resumen General</h2>
     <div class="summaryInfo">
+      <div class="summmaryFilter">
+        <h3>
+          Escoja un municipio para mostrar sus indicadores de sustentabilidad
+        </h3>
+        <div class="formFilter">
+          <mat-form-field appearance="outline">
+            <input
+              type="text"
+              placeholder="Selecione un municipio"
+              aria-label="Number"
+              matInput
+              [formControl]="myControl"
+              [matAutocomplete]="auto"
+            />
+          </mat-form-field>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let option of filteredOptions | async"
+              [value]="option"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+          <button mat-raised-button color="primary" (click)="showMunicipio(myControl.value!)">Graficar</button>
+          <button mat-raised-button color="primary" (click)="fetchRadarSustentabilidad()">Mostrar Todo</button>
+
+        </div>
+      </div>
       <div class="chartSummary">
-        <p>#####</p>
+        <p>~ {{ avgGlob | number : "1.2-2" }}</p>
         <div class="chartCard">
-          <canvas baseChart class="chart"
-                [data]="radarChartData"
-                [options]="radarChartOptions"
-                [type]="radarChartType">
-</canvas>
+          <canvas
+            *ngIf="loadSus"
+            baseChart
+            class="chart"
+            [data]="radarSusChartData"
+            [options]="radarSusChartOptions"
+            [type]="radarSusChartType"
+          >
+          </canvas>
         </div>
       </div>
     </div>
@@ -92,53 +138,65 @@
       <div class="charPieUnity">
         <div class="infoChart">
           <h3>Indice Economico</h3>
-          <p>#########:</p>
+          <p>~ {{ avgEco | number : "1.2-2" }}</p>
         </div>
         <div class="chartUnity">
-          <canvas baseChart class="chart"
-                [data]="radarChartData"
-                [options]="radarChartOptions"
-                [type]="radarChartType">
-</canvas>
+          <canvas
+            baseChart
+            class="chart"
+            [data]="radarEcoChartData"
+            [options]="radarEcoChartOptions"
+            [type]="radarEcoChartType"
+          >
+          </canvas>
         </div>
       </div>
       <div class="charPieUnity">
         <div class="infoChart">
           <h3>Indice Social</h3>
-          <p>#########:</p>
+          <p>~ {{ avgSoc | number : "1.2-2" }}</p>
         </div>
         <div class="chartUnity">
-          <canvas baseChart class="chart"
-                [data]="radarChartData"
-                [options]="radarChartOptions"
-                [type]="radarChartType">
-</canvas>
+          <canvas
+            baseChart
+            class="chart"
+            [data]="radarSocChartData"
+            [options]="radarSocChartOptions"
+            [type]="radarSocChartType"
+          >
+          </canvas>
         </div>
       </div>
       <div class="charPieUnity">
         <div class="infoChart">
           <h3>Indice Ambiental</h3>
-          <p>#########:</p>
+          <p>~ {{ avgAmb | number : "1.2-2" }}</p>
         </div>
         <div class="chartUnity">
-          <canvas baseChart class="chart"
-                [data]="radarChartData"
-                [options]="radarChartOptions"
-                [type]="radarChartType">
-</canvas>
+          <canvas
+            baseChart
+            class="chart"
+            [data]="radarAmbChartData"
+            [options]="radarAmbChartOptions"
+            [type]="radarAmbChartType"
+          >
+          </canvas>
         </div>
       </div>
       <div class="charPieUnity">
         <div class="infoChart">
-          <h3>Indice Global Sustentabilidad</h3>
-          <p>#########:</p>
+          <h3>Indice Institucional</h3>
+          <p>~ {{ avgInst | number : "1.2-2" }}</p>
         </div>
         <div class="chartUnity">
-          <canvas baseChart class="chart"
-                [data]="radarChartData"
-                [options]="radarChartOptions"
-                [type]="radarChartType">
-</canvas>
+          <canvas
+            baseChart
+            class="chart"
+            [data]="radarInstChartData"
+            [options]="radarInstChartOptions"
+            [type]="radarInstChartType"
+          >
+          </canvas>
         </div>
       </div>
     </div>

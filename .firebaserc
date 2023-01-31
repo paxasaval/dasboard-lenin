@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "dashboard-lenin": {
+      "hosting": {
+        "dashboard": [
+          "dashboard-lenin"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "dashboard-lenin"
+  }
+}

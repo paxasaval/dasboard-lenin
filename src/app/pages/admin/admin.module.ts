@@ -1,3 +1,4 @@
+import { HotToastModule } from '@ngneat/hot-toast';
 import { MaterialModule } from './../../material/material/material.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,8 @@ import { HomeAdminComponent } from './pages/home-admin/home-admin.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    MaterialModule
+    MaterialModule,
+    HotToastModule.forRoot(),
   ]
 })
 export class AdminModule { }

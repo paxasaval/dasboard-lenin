@@ -1,0 +1,29 @@
+<main class="main">
+  <section class="login">
+    <form class="form" [formGroup]="loginForm" (ngSubmit)="submit()">
+      <label for="">Correo Electrónico:</label>
+      <mat-form-field appearance="outline">
+        <input matInput  formControlName="email" />
+
+        <mat-error *ngIf="email?.errors?.['required']">
+          Correo electrónico es requerido
+        </mat-error>
+        <mat-error *ngIf="email?.errors?.['email']">
+          Por favor ingrese un correo electronico valido
+        </mat-error>
+      </mat-form-field>
+      <label for="">Contraseña:</label>
+      <mat-form-field appearance="outline">
+        <input matInput type="password"  formControlName="password" />
+        <mat-error *ngIf="password?.errors?.['required']">
+          Contraseña es requerida
+        </mat-error>
+      </mat-form-field>
+      <div class="btn">
+          <button type="submit" mat-raised-button color="primary" class="btn" >Iniciar Sesión</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+
