@@ -2,8 +2,7 @@
   height: 100vh;
   width: 100vw;
   background-repeat: no-repeat;
-  background-size: 101vh;
-  background-position: right;
+  background-image: url('../../../../assets/bg-login.jpg');
 
 }
 .login{
@@ -12,12 +11,16 @@
   align-items: center;
   text-align: left;
   background-color: #fff;
+  flex-direction: column;
   height: 500px;
   width: 300px;
   border-radius: 15px;
   position: relative;
   left: 78%;
   top: 20%
+}
+.logo{
+  height: 8em;
 }
 .form{
   display: flex;
