@@ -2,6 +2,7 @@
   <section class="info">
     <div class="navigation">
       <img class="logo" src="../../../../../assets/logo.png" alt="" />
+      <p class="logo-name">VIAE</p>
     </div>
     <div class="userInfo">
       <div class="userPhoto"></div>
@@ -27,8 +28,8 @@
     </article>
     <article class="cardSummary bg-2">
       <div class="cardInfo">
-        <p class="cardSummary-desc">Indice social</p>
-        <span class="avg">~ {{ avgSoc | number : "1.2-2" }}</span>
+        <p class="cardSummary-desc txt-dark">Indice Social</p>
+        <span class="avg txt-dark">~ {{ avgSoc | number : "1.2-2" }}</span>
         <div class="cardSummary-Date">
           <p class="colorUp">
             {{ bestSoc.municipio }} <span class="up">{{ bestSoc.value }}</span>
@@ -41,8 +42,8 @@
     </article>
     <article class="cardSummary bg-3">
       <div class="cardInfo">
-        <p class="cardSummary-desc">Indice ambiental</p>
-        <span class="avg">~ {{ avgAmb | number : "1.2-2" }}</span>
+        <p class="cardSummary-desc txt-dark">Indice Ambiental</p>
+        <span class="avg txt-dark">~ {{ avgAmb | number : "1.2-2" }}</span>
         <div class="cardSummary-Date">
           <p class="colorUp">
             {{ bestAmb.municipio }} <span class="up">{{ bestAmb.value }}</span>
@@ -72,8 +73,8 @@
     </article>
     <article class="cardSummary bg-5">
       <div class="cardInfo">
-        <p class="cardSummary-desc">Indice global sustenabilidad</p>
-        <span class="avg">~ {{ avgGlob | number : "1.2-2" }}</span>
+        <p class="cardSummary-desc txt-dark">Indice Global Sustenabilidad</p>
+        <span class="avg txt-dark">~ {{ avgGlob | number : "1.2-2" }}</span>
         <div class="cardSummary-Date">
           <p class="colorUp">
             {{ bestGlobal.municipio }}
@@ -115,6 +116,11 @@
           </mat-autocomplete>
           <button mat-raised-button color="primary" (click)="showMunicipio(myControl.value!)">Graficar</button>
           <button mat-raised-button color="primary" (click)="fetchRadarSustentabilidad()">Mostrar Todo</button>
+
+        </div>
+        <div *ngIf="isAdmin" class="btn-admin">
+          <button mat-raised-button color="primary" (click)="newMunicipio()">Agregar Municipio</button>
+          <button *ngIf="edit" mat-raised-button color="primary" (click)="editMunicipio()">Editar Municipio</button>
 
         </div>
       </div>

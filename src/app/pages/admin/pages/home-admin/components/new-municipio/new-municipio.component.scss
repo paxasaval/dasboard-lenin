@@ -1,0 +1,28 @@
+.form{
+  display: flex;
+  flex-direction: column;
+  padding-top: 1em;
+  padding-left: 2.5em;
+  width: 90%;
+}
+
+.formInput{
+  display: flex;
+  width: 100%;
+  margin-bottom: 1em;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.label{
+  display: flex;
+  width: 35%;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+input{
+  min-height: 2.5em;
+  padding-left: 0.25em;
+  border-radius: 6px;
+  border-color: #f8f8f8;
+}

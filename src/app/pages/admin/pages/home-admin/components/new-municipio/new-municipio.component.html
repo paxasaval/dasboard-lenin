@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>{{data.state}} Municipio</h1>
+<div mat-dialog-content>
+  <form [formGroup]="municipioForm" class="form">
+    <div class="formInput">
+      <p class="label">Nombre del municipio:</p>
+      <input matInput formControlName="municipio" class="inputStyle" type="text">
+    </div>
+    <div class="formInput">
+      <p class="label"> dpa canton:</p>
+      <input matInput formControlName="dpa_canton" class="inputStyle" type="number">
+    </div>
+    <div class="formInput">
+      <p class="label">Indicador Ambiental:</p>
+      <input matInput formControlName="ind_amb" class="inputStyle" type="number">
+    </div>
+    <div class="formInput">
+      <p class="label">Indicador Economico:</p>
+      <input matInput formControlName="ind_econo" class="inputStyle" type="number">
+    </div>
+    <div class="formInput">
+      <p class="label">Indicador Institucional:</p>
+      <input matInput formControlName="ind_insti" class="inputStyle" type="number">
+    </div>
+    <div class="formInput">
+      <p class="label">Indicador Social:</p>
+      <input matInput formControlName="ind_soc" class="inputStyle" type="number">
+    </div>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancelar</button>
+  <button mat-raised-button  (click)="addMunicipio()">Guardar</button>
+</div>

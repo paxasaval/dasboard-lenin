@@ -8,8 +8,8 @@ import {MatButtonModule} from '@angular/material/button'
 import { HttpClientModule } from '@angular/common/http';
 import { AvatarModule } from 'ngx-avatar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-
-
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [],
   imports: [
@@ -21,7 +21,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatInputModule,
     MatButtonModule,
     HttpClientModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDialogModule,
+    MatIconModule
 
   ],
   exports:[
@@ -32,7 +34,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatInputModule,
     MatButtonModule,
     HttpClientModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDialogModule,
+    MatIconModule
 
   ]
 })

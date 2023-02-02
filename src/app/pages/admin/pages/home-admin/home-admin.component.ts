@@ -7,6 +7,15 @@ import { AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren } 
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { UserService } from 'src/app/services/user.service';
+import { RolesService } from 'src/app/services/roles.service';
+import { MatDialog } from '@angular/material/dialog';
+import { NewMunicipioComponent } from './components/new-municipio/new-municipio.component';
+
+export interface DataDialog{
+  state:string,
+  municipio?:IndicadorID
+}
+
 @Component({
   selector: 'app-home-admin',
   templateUrl: './home-admin.component.html',
@@ -14,9 +23,21 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomeAdminComponent implements OnInit {
   @ViewChildren(BaseChartDirective) charts!: QueryList<BaseChartDirective>;
-  constructor(private indiService: IndicadoresService,private authService: AuthService, private userService:UserService) {
+  constructor(
+    private indiService: IndicadoresService,
+    private authService: AuthService,
+    private userService:UserService,
+    private rolService: RolesService,
+    private municipioDialog:MatDialog) {
   }
-  allData: Indicador[] = []
+  //banderaAdmin
+  isAdmin=false
+  //statesModal
+  state='AGREGAR'
+  edit=false
+  selectedMunicipio!:Indicador
+  //DataVars
+  allData: IndicadorID[] = []
   matrizData: any[] = []
   filterData: string[]=[]
   //char-banderas
@@ -75,12 +96,13 @@ export class HomeAdminComponent implements OnInit {
   //user
   userName= 'NO NAME'
   userId=''
-
+  userRol=''
   myControl = new FormControl('');
   filteredOptions!: Observable<string[]>;
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('user')!
+    this.userRol=localStorage.getItem('rol')!
     this.fetchUserInfo()
     this.fetchIndcadores()
     //filterDATA
@@ -94,8 +116,24 @@ export class HomeAdminComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.filterData.filter(option => option.toLowerCase().includes(filterValue));
   }
-
+  newMunicipio(){
+    this.municipioDialog.open(NewMunicipioComponent,{
+      data:{
+        state:'Agregar'
+      }
+    })
+  }
+  editMunicipio(){
+    this.municipioDialog.open(NewMunicipioComponent,{
+      data:{
+        state:'Editar',
+        municipio:this.selectedMunicipio
+      }
+    })
+  }
   showMunicipio(municipio:string){
+    const isIndicador = (element:Indicador)=>(element.municipio)===(municipio)
+    this.selectedMunicipio=this.allData.find(isIndicador)!
     const isMunicipio = (element:string)=>(element)===(municipio)
     const i = this.filterData.findIndex(isMunicipio)
     const isInst =(element:string)=>(element)===('ind_insti')
@@ -125,7 +163,7 @@ export class HomeAdminComponent implements OnInit {
     };
     this.radarSusChartOptions = radarConfig
     this.radarSusChartOptions?.scales
-    this.radarSusChartData.labels = [,this.matrizData[0][ind5],this.matrizData[0][ind1],this.matrizData[0][ind2],this.matrizData[0][ind3],this.matrizData[0][ind4]]
+    this.radarSusChartData.labels = [this.matrizData[0][ind5],this.matrizData[0][ind1],this.matrizData[0][ind2],this.matrizData[0][ind3],this.matrizData[0][ind4]]
     const row = [this.matrizData[ind5+1][i],this.matrizData[ind1+1][i],this.matrizData[ind2+1][i],this.matrizData[ind3+1][i],this.matrizData[ind4+1][i]]
     console.log(row)
     this.radarSusChartData.datasets[0].data = row
@@ -135,16 +173,52 @@ export class HomeAdminComponent implements OnInit {
     }
     this.radarSusChartData.datasets[1].data = [this.avgGlob,this.avgInst,this.avgEco,this.avgSoc,this.avgAmb]
     this.radarSusChartData.datasets[1].label="Promedio General"
+    //ind_Amb
+    if(this.radarAmbChartData.datasets.length>1){
+      this.radarAmbChartData.datasets[1].data=[this.selectedMunicipio.ind_amb!]
+      this.radarAmbChartData.datasets[1].label=this.selectedMunicipio.municipio
+    }else{
+      this.radarAmbChartData.datasets.push({data:[this.selectedMunicipio.ind_amb!],label:this.selectedMunicipio.municipio!})
+    }
+    //ind_econo
+    if(this.radarEcoChartData.datasets.length>1){
+      this.radarEcoChartData.datasets[1].data=[this.selectedMunicipio.ind_econo!]
+      this.radarEcoChartData.datasets[1].label=this.selectedMunicipio.municipio
+    }else{
+      this.radarEcoChartData.datasets.push({data:[this.selectedMunicipio.ind_econo!],label:this.selectedMunicipio.municipio!})
+    }
+    //ind_insti
+    if(this.radarInstChartData.datasets.length>1){
+      this.radarInstChartData.datasets[1].data=[this.selectedMunicipio.ind_insti!]
+      this.radarInstChartData.datasets[1].label=this.selectedMunicipio.municipio
+    }else{
+      this.radarInstChartData.datasets.push({data:[this.selectedMunicipio.ind_insti!],label:this.selectedMunicipio.municipio!})
+    }
+    //ind_soc
+    if(this.radarSocChartData.datasets.length>1){
+      this.radarSocChartData.datasets[1].data=[this.selectedMunicipio.ind_soc!]
+      this.radarSocChartData.datasets[1].label=this.selectedMunicipio.municipio
+    }else{
+      this.radarSocChartData.datasets.push({data:[this.selectedMunicipio.ind_soc!],label:this.selectedMunicipio.municipio!})
+    }
     this.charts.forEach(chart => {
       chart?.update();
     })
     this.loadSus = true
+    this.edit=true
   }
+
 
   fetchUserInfo(){
     this.userService.getUserById(this.userId).subscribe(user=>{
       this.userName = user.name!
     })
+    this.rolService.getRolById(this.userRol).subscribe(rol=>{
+      if(rol.name=='admin'){
+        this.isAdmin=true
+      }
+    })
+
   }
 
   fetchIndcadores() {
@@ -152,13 +226,10 @@ export class HomeAdminComponent implements OnInit {
       this.allData = data
       this.matrizData = this.extracData(this.allData)
       this.fetchRadarSustentabilidad()
-      this.fetchRadarEconomico()
-      this.fetchRadarSocial()
-      this.fetchRadarAmbiental()
-      this.fetchRadarInstitucional()
     })
   }
   extracData(data: Indicador[]) {
+    this.filterData=[]
     let result: any[] = []
     let keys: string[] = Object.keys(data[0])
     result.push(keys)
@@ -180,7 +251,6 @@ export class HomeAdminComponent implements OnInit {
   }
 
   fetchRadarSustentabilidad() {
-
     let radarConfg: ChartConfiguration['options'] = {
       responsive: true,
       scales: {
@@ -191,8 +261,28 @@ export class HomeAdminComponent implements OnInit {
         }
       }
     };
+    //setDataSus
     if(this.radarSusChartData.datasets.length>1){
-      this.radarSusChartData.datasets.pop
+      this.radarSusChartData.datasets=[{
+        data:[],
+        label:''
+      }]
+    }
+    //setDataAmb
+    if(this.radarAmbChartData.datasets.length>1){
+      this.radarAmbChartData.datasets=[this.radarAmbChartData.datasets[0]]
+    }
+    //setDataEco
+    if(this.radarEcoChartData.datasets.length>1){
+      this.radarEcoChartData.datasets=[this.radarEcoChartData.datasets[0]]
+    }
+    //setDataInst
+    if(this.radarInstChartData.datasets.length>1){
+      this.radarInstChartData.datasets=[this.radarInstChartData.datasets[0]]
+    }
+    //setDataSoc
+    if(this.radarSocChartData.datasets.length>1){
+      this.radarSocChartData.datasets=[this.radarSocChartData.datasets[0]]
     }
     this.radarSusChartData.datasets[0].label='Indice Global Sustentabilidad'
     this.loadSus = false
@@ -227,6 +317,11 @@ export class HomeAdminComponent implements OnInit {
       total+=row[n]
     }
     this.avgGlob=total/row.length
+    this.edit=false
+    this.fetchRadarEconomico()
+      this.fetchRadarSocial()
+      this.fetchRadarAmbiental()
+      this.fetchRadarInstitucional()
 
   }
 
@@ -235,6 +330,7 @@ export class HomeAdminComponent implements OnInit {
 
     const isMunicipio = (element: string) => (element) == ('municipio')
     const x = this.matrizData[0].findIndex(isMunicipio)
+
     const col = this.matrizData[x + 1]
     this.radarEcoChartData.labels = col
 
@@ -395,7 +491,7 @@ export class HomeAdminComponent implements OnInit {
   public radarEcoChartData: ChartData<'radar'> = {
     labels: [],
     datasets: [
-      { data: [], label: 'Indice de Economico' },
+      { data: [], label: 'Indice de Economico',borderColor:'rgba(242,183,5)',backgroundColor:'rgba(242,183,5,0.25)',pointBackgroundColor:'rgba(242,183,5)'},
     ]
   };
   public radarEcoChartType: ChartType = 'radar';
@@ -414,7 +510,7 @@ export class HomeAdminComponent implements OnInit {
   public radarSocChartData: ChartData<'radar'> = {
     labels: [],
     datasets: [
-      { data: [], label: 'Indice Social' },
+      { data: [], label: 'Indice Social',borderColor:'rgba(242,135,5)',backgroundColor:'rgba(242,135,5,0.25)',pointBackgroundColor:'rgba(242,135,5)' },
     ]
   };
   public radarSocChartType: ChartType = 'radar';
@@ -433,7 +529,7 @@ export class HomeAdminComponent implements OnInit {
   public radarAmbChartData: ChartData<'radar'> = {
     labels: [],
     datasets: [
-      { data: [], label: 'Indice Ambiental' },
+      { data: [], label: 'Indice Ambiental',borderColor:'rgba(242,92,5)',backgroundColor:'rgba(242,92,5,0.25)',pointBackgroundColor:'rgba(242,92,5)' },
     ]
   };
   public radarAmbChartType: ChartType = 'radar';
@@ -452,7 +548,7 @@ export class HomeAdminComponent implements OnInit {
   public radarInstChartData: ChartData<'radar'> = {
     labels: [],
     datasets: [
-      { data: [], label: 'Indice Institucional' },
+      { data: [], label: 'Indice Institucional',borderColor:'rgba(69,115,36)',backgroundColor:'rgba(69,115,36,0.25)',pointBackgroundColor:'rgba(69,115,36)' },
     ]
   };
   public radarInstChartType: ChartType = 'radar';

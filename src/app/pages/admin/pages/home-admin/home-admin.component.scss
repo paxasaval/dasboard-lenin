@@ -32,6 +32,11 @@
 .logo{
   height: 8vh;
 }
+.logo-name{
+  font-size: 2em;
+  letter-spacing: 0.25em;
+  font-weight: 800;
+}
 .userInfo{
   height: 100%;
   width: 50%;
@@ -99,28 +104,36 @@
   justify-content: space-between;
 }
 .bg-1{
-  background: radial-gradient(circle, rgba(60,110,113,1) 0%, rgba(56,102,110,1) 100%);
-
+  background:  #5dad24
 }
 .bg-2{
-  background: radial-gradient(circle,rgba(56,102,110,1) 0%, rgba(51,94,107,1) 100%);
+  background: #F2B705
 
 }
 .bg-3{
-  background: radial-gradient(circle,rgba(51,94,107,1) 0%, rgba(45,84,103,1) 100%);
+  background: #F28705
 }
 .bg-4{
-  background: radial-gradient(circle,rgba(45,84,103,1) 0%, rgba(43,81,102,1) 100%);
+  background:#F25C05
 }
 .bg-5{
-  background: radial-gradient(circle,rgba(43,81,102,1) 0%, rgba(40,75,99,1) 100%);
+  background:#7ba85c
 }
-
+.txt-light{
+  color: #fff;
+}
+.txt-dark{
+  color: #000;
+}
 .colorUp{
-  color: #16c784;
+
+  color: #fff;
+  font-weight: 800;
 }
 .colorDown{
-  color: #ea3943;
+  color: #000;
+  font-weight: 800;
+
 }
 .cardSummary-Date{
   width: 100%;
